@@ -84,11 +84,6 @@ def main():
 
     answer = 0
 
-    for i in range(k):
-        if c[i] in b and a[c[i] - 1] >= x:
-            answer += x
-        else:
-            answer += a[c[i] - 1]
 
     print(answer)
 
