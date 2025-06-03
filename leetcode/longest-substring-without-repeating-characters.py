@@ -33,15 +33,20 @@ s consists of English letters, digits, symbols and spaces.
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         n = len(s)
+        maxLength = 0
+        charSet = set()
+        left = 0
 
-        max_now = 0
-        for i in range(n):
-            for j in range(i+1, n+1):
-                temp = s[i: j]
-                max_now = max(max_now, len(temp)) if len(temp) == len(set(temp)) else max_now
+        for right in range(n):
+            if s[right] not in charSet:
+                charSet.add(s[right])
+                maxLength = max(maxLength, right - left + 1)
+            else:
+                while s[right] in charSet:
+                    charSet.remove(s[left])
+                    left += 1
+                charSet.add(s[right])
 
-        return max_now
-
-
+        return maxLength
 s = Solution()
 print(s.lengthOfLongestSubstring("anviaj"))
