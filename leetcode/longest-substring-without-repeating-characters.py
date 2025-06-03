@@ -30,6 +30,9 @@ s consists of English letters, digits, symbols and spaces.
 """
 
 
+
+# First variant
+
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         n = len(s)
@@ -48,5 +51,24 @@ class Solution:
                 charSet.add(s[right])
 
         return maxLength
+s = Solution()
+print(s.lengthOfLongestSubstring("anviaj"))
+
+# Second
+from collections import deque
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        res = 0
+        q = deque()
+        for c in s:
+            if c in q:
+                while q.popleft() != c:
+                    pass
+            q.append(c)
+            res = max(res, len(q))
+
+        return res
+
 s = Solution()
 print(s.lengthOfLongestSubstring("anviaj"))
