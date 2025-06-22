@@ -56,10 +56,27 @@ class Solution(object):
 
         n = len(nums)
 
-        ranges = []
+        if n == 0:
+            return []
 
-        last_digit = -1
+        if n == 1:
+            return [str(nums[0])]
+
+        ranges = [nums[0]]
+
         for i in range(1, n):
-            if a[i - 1] < a[i] - 1:
-                ranges.append(str(a[i - 1]) if last_digit == -1 else f"{last_digit}->{a[i - 1]}")
-        print(ranges)
+            if nums[i-1] < nums[i] - 1:
+                ranges.append(nums[i-1])
+                ranges.append(nums[i])
+        ranges.append(nums[-1])
+
+        output = []
+        for i in range(0, len(ranges), 2):
+            if ranges[i] != ranges[i+1]:
+                output.append(f"{ranges[i]}->{ranges[i+1]}")
+            else:
+                output.append(f"{ranges[i]}")
+
+        return output
+solution = Solution()
+print(solution.summaryRanges([0,2,3,4,6,8,9]))
